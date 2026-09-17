@@ -1,9 +1,10 @@
 package com.qe.automation.tests;
 
+import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
 
 public class CreateUserTest {
 
@@ -17,17 +18,32 @@ public class CreateUserTest {
                 }
                 """;
 
-        given()
-            .baseUri("https://reqres.in")
-            .contentType("application/json")
-            .body(requestBody)
+        Response response =
+                given()
+                    .baseUri("https://reqres.in")
+                    .contentType("application/json")
+                    .body(requestBody)
 
-        .when()
-            .post("/api/users")
+                .when()
+                    .post("/api/users");
 
-        .then()
-            .statusCode(201)
-            .body("name", equalTo("Kasunshya"))
-            .body("job", equalTo("QA Engineer"));
+        // Print complete response
+        response.prettyPrint();
+
+        // Validate status code
+        Assert.assertEquals(response.statusCode(), 201);
+
+        // Extract response values
+        String userName = response.jsonPath().getString("name");
+        String job = response.jsonPath().getString("job");
+        String userId = response.jsonPath().getString("id");
+
+        System.out.println("User ID: " + userId);
+        System.out.println("User Name: " + userName);
+        System.out.println("Job: " + job);
+
+        // Validate extracted values
+        Assert.assertEquals(userName, "Kasunshya");
+        Assert.assertEquals(job, "QA Engineer");
     }
 }
