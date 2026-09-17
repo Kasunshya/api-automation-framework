@@ -92,7 +92,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">3 methods,   3 passed</span>
+                    <span class="method-stats">5 methods,   5 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -108,12 +108,22 @@
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.qe.automation.tests.DeleteUserTest" class="method navigator-link" hash-for-method="deleteUserTest">deleteUserTest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-Surefire_suite" title="com.qe.automation.tests.GetUserTest" class="method navigator-link" hash-for-method="getSingleUserTest">getSingleUserTest</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-Surefire_suite" title="com.qe.automation.tests.FirstApiTest" class="method navigator-link" hash-for-method="getUsersTest">getUsersTest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.qe.automation.tests.UpdateUserTest" class="method navigator-link" hash-for-method="updateUserTest">updateUserTest</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Surefire_suite -->
@@ -131,14 +141,29 @@
           <div class="suite-Surefire_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">com.qe.automation.tests.FirstApiTest</span>
+              <span class="class-name">com.qe.automation.tests.DeleteUserTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="getUsersTest">
-                  </a> <!-- getUsersTest -->
-                  <span class="method-name">getUsersTest</span>
+                  <a name="deleteUserTest">
+                  </a> <!-- deleteUserTest -->
+                  <span class="method-name">deleteUserTest</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Surefire_suite-class-passed -->
+          <div class="suite-Surefire_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.qe.automation.tests.UpdateUserTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="updateUserTest">
+                  </a> <!-- updateUserTest -->
+                  <span class="method-name">updateUserTest</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -154,6 +179,21 @@
                   <a name="createUserTest">
                   </a> <!-- createUserTest -->
                   <span class="method-name">createUserTest</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Surefire_suite-class-passed -->
+          <div class="suite-Surefire_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.qe.automation.tests.FirstApiTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="getUsersTest">
+                  </a> <!-- getUsersTest -->
+                  <span class="method-name">getUsersTest</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -185,8 +225,10 @@
   &lt;test thread-count=&quot;5&quot; name=&quot;Surefire test&quot; verbose=&quot;0&quot;&gt;
     &lt;classes&gt;
       &lt;class name=&quot;com.qe.automation.tests.CreateUserTest&quot;/&gt;
+      &lt;class name=&quot;com.qe.automation.tests.DeleteUserTest&quot;/&gt;
       &lt;class name=&quot;com.qe.automation.tests.FirstApiTest&quot;/&gt;
       &lt;class name=&quot;com.qe.automation.tests.GetUserTest&quot;/&gt;
+      &lt;class name=&quot;com.qe.automation.tests.UpdateUserTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Surefire test --&gt;
 &lt;/suite&gt; &lt;!-- Surefire suite --&gt;
@@ -200,7 +242,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Surefire test (3 classes)</span>
+                <span class="test-name">Surefire test (5 classes)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -226,19 +268,27 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(3);
+data.addRows(5);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'createUserTest')
 data.setCell(0, 2, 'com.qe.automation.tests.CreateUserTest')
-data.setCell(0, 3, 3344);
+data.setCell(0, 3, 3370);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'getUsersTest')
 data.setCell(1, 2, 'com.qe.automation.tests.FirstApiTest')
-data.setCell(1, 3, 956);
+data.setCell(1, 3, 823);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'getSingleUserTest')
 data.setCell(2, 2, 'com.qe.automation.tests.GetUserTest')
-data.setCell(2, 3, 794);
+data.setCell(2, 3, 753);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'deleteUserTest')
+data.setCell(3, 2, 'com.qe.automation.tests.DeleteUserTest')
+data.setCell(3, 3, 538);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'updateUserTest')
+data.setCell(4, 2, 'com.qe.automation.tests.UpdateUserTest')
+data.setCell(4, 3, 436);
 window.suiteTableData['Surefire_suite']= { tableData: data, tableDiv: 'times-div-Surefire_suite'}
 return data;
 }
@@ -276,17 +326,31 @@ return data;
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
+              <div class="chronological-class-name">com.qe.automation.tests.DeleteUserTest</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">deleteUserTest</span>
+                <span class="method-start">3376 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
               <div class="chronological-class-name">com.qe.automation.tests.FirstApiTest</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">getUsersTest</span>
-                <span class="method-start">3349 ms</span>
+                <span class="method-start">3917 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">com.qe.automation.tests.GetUserTest</div> <!-- chronological-class-name -->
               <div class="test-method">
                 <span class="method-name">getSingleUserTest</span>
-                <span class="method-start">4306 ms</span>
+                <span class="method-start">4742 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.qe.automation.tests.UpdateUserTest</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">updateUserTest</span>
+                <span class="method-start">5496 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
