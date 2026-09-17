@@ -1,20 +1,22 @@
 package com.qe.automation.tests;
 
+import com.qe.automation.base.BaseTest;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class FirstApiTest {
+public class FirstApiTest extends BaseTest {
 
     @Test
     public void getUsersTest() {
 
         given()
-            .baseUri("https://reqres.in")
+            .spec(requestSpec)
+            .queryParam("page", 2)
 
         .when()
-            .get("/api/users?page=2")
+            .get("/api/users")
 
         .then()
             .statusCode(200)

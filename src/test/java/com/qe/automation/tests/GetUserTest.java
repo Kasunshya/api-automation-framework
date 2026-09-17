@@ -1,17 +1,18 @@
 package com.qe.automation.tests;
 
+import com.qe.automation.base.BaseTest;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class GetUserTest {
+public class GetUserTest extends BaseTest {
 
     @Test
     public void getSingleUserTest() {
 
         given()
-            .baseUri("https://reqres.in")
+            .spec(requestSpec)
             .pathParam("userId", 2)
 
         .when()
@@ -22,6 +23,5 @@ public class GetUserTest {
             .body("data.id", equalTo(2))
             .body("data.first_name", equalTo("Janet"))
             .body("data.last_name", equalTo("Weaver"));
-            
     }
 }

@@ -1,11 +1,12 @@
 package com.qe.automation.tests;
 
+import com.qe.automation.base.BaseTest;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class UpdateUserTest {
+public class UpdateUserTest extends BaseTest {
 
     @Test
     public void updateUserTest() {
@@ -18,8 +19,7 @@ public class UpdateUserTest {
                 """;
 
         given()
-            .baseUri("https://reqres.in")
-            .contentType("application/json")
+            .spec(requestSpec)
             .body(requestBody)
             .pathParam("userId", 2)
 
