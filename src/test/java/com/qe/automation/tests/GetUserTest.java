@@ -1,10 +1,10 @@
 package com.qe.automation.tests;
 
 import com.qe.automation.base.BaseTest;
-import com.qe.automation.endpoints.UserEndpoints;
+import com.qe.automation.services.UserService;
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 public class GetUserTest extends BaseTest {
@@ -12,17 +12,14 @@ public class GetUserTest extends BaseTest {
     @Test
     public void getSingleUserTest() {
 
-        given()
-            .spec(requestSpec)
-            .pathParam("userId", 2)
+        UserService userService = new UserService(requestSpec);
 
-        .when()
-            .get(UserEndpoints.USER_BY_ID)
+        Response response = userService.getUser(2);
 
-        .then()
-            .statusCode(200)
-            .body("data.id", equalTo(2))
-            .body("data.first_name", equalTo("Janet"))
-            .body("data.last_name", equalTo("Weaver"));
+        response.then()
+                .statusCode(200)
+                .body("data.id", equalTo(2))
+                .body("data.first_name", equalTo("Janet"))
+                .body("data.last_name", equalTo("Weaver"));
     }
 }

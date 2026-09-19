@@ -1,12 +1,10 @@
 package com.qe.automation.tests;
 
 import com.qe.automation.base.BaseTest;
-import com.qe.automation.endpoints.UserEndpoints;
+import com.qe.automation.services.UserService;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static io.restassured.RestAssured.*;
 
 public class CreateUserTest extends BaseTest {
 
@@ -20,13 +18,9 @@ public class CreateUserTest extends BaseTest {
                 }
                 """;
 
-        Response response =
-                given()
-                    .spec(requestSpec)
-                    .body(requestBody)
+        UserService userService = new UserService(requestSpec);
 
-                .when()
-                    .post(UserEndpoints.USERS);
+        Response response = userService.createUser(requestBody);
 
         response.prettyPrint();
 

@@ -1,24 +1,20 @@
 package com.qe.automation.tests;
 
 import com.qe.automation.base.BaseTest;
-import com.qe.automation.endpoints.UserEndpoints;
+import com.qe.automation.services.UserService;
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
-
-import static io.restassured.RestAssured.*;
 
 public class DeleteUserTest extends BaseTest {
 
     @Test
     public void deleteUserTest() {
 
-        given()
-            .spec(requestSpec)
-            .pathParam("userId", 2)
+        UserService userService = new UserService(requestSpec);
 
-        .when()
-            .delete(UserEndpoints.USER_BY_ID)
+        Response response = userService.deleteUser(2);
 
-        .then()
-            .statusCode(204);
+        response.then()
+                .statusCode(204);
     }
 }

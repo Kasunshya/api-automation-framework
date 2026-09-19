@@ -1,10 +1,10 @@
 package com.qe.automation.tests;
 
 import com.qe.automation.base.BaseTest;
-import com.qe.automation.endpoints.UserEndpoints;
+import com.qe.automation.services.UserService;
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 public class UpdateUserTest extends BaseTest {
@@ -19,17 +19,13 @@ public class UpdateUserTest extends BaseTest {
                 }
                 """;
 
-        given()
-            .spec(requestSpec)
-            .body(requestBody)
-            .pathParam("userId", 2)
+        UserService userService = new UserService(requestSpec);
 
-        .when()
-            .put(UserEndpoints.USER_BY_ID)
+        Response response = userService.updateUser(2, requestBody);
 
-        .then()
-            .statusCode(200)
-            .body("name", equalTo("Kasunshya Updated"))
-            .body("job", equalTo("Senior QA Engineer"));
+        response.then()
+                .statusCode(200)
+                .body("name", equalTo("Kasunshya Updated"))
+                .body("job", equalTo("Senior QA Engineer"));
     }
 }
