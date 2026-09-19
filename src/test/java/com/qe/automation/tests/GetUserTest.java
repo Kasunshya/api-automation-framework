@@ -1,6 +1,7 @@
 package com.qe.automation.tests;
 
 import com.qe.automation.base.BaseTest;
+import com.qe.automation.endpoints.UserEndpoints;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.*;
@@ -16,7 +17,7 @@ public class GetUserTest extends BaseTest {
             .pathParam("userId", 2)
 
         .when()
-            .get("/api/users/{userId}")
+            .get(UserEndpoints.USER_BY_ID)
 
         .then()
             .statusCode(200)

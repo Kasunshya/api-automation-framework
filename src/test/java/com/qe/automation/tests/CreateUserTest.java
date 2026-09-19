@@ -1,6 +1,7 @@
 package com.qe.automation.tests;
 
 import com.qe.automation.base.BaseTest;
+import com.qe.automation.endpoints.UserEndpoints;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -25,7 +26,7 @@ public class CreateUserTest extends BaseTest {
                     .body(requestBody)
 
                 .when()
-                    .post("/api/users");
+                    .post(UserEndpoints.USERS);
 
         response.prettyPrint();
 
