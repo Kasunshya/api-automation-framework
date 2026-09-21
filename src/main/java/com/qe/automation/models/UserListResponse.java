@@ -1,7 +1,9 @@
 package com.qe.automation.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserListResponse {
 
     private Integer page;

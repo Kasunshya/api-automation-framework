@@ -1,5 +1,8 @@
 package com.qe.automation.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SingleUserResponse {
 
     private UserData data;
