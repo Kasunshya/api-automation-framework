@@ -58,6 +58,8 @@
     </dependencies>
 
     <build>
+
+    
         <plugins>
 
            <plugin>
@@ -74,5 +76,21 @@
 
         </plugins>
     </build>
+<profiles>
 
+    <profile>
+        <id>qa</id>
+        <properties>
+            <environment>qa</environment>
+        </properties>
+    </profile>
+
+    <profile>
+        <id>dev</id>
+        <properties>
+            <environment>dev</environment>
+        </properties>
+    </profile>
+
+</profiles>
 </project>

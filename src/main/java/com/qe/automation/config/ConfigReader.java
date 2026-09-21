@@ -6,9 +6,11 @@ import java.util.Properties;
 
 public class ConfigReader {
 
-    private static final Properties properties = new Properties();
+    private static final Properties properties =
+            new Properties();
 
     static {
+
         try (InputStream input =
                      ConfigReader.class
                              .getClassLoader()
@@ -25,6 +27,7 @@ public class ConfigReader {
             properties.load(input);
 
         } catch (IOException e) {
+
             throw new RuntimeException(
                     "Failed to load config.properties",
                     e
@@ -33,6 +36,15 @@ public class ConfigReader {
     }
 
     public static String getProperty(String key) {
+
+        String systemProperty =
+                System.getProperty(key);
+
+        if (systemProperty != null &&
+                !systemProperty.isBlank()) {
+
+            return systemProperty;
+        }
 
         return properties.getProperty(key);
     }
