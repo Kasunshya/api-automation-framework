@@ -16,9 +16,21 @@ public class BaseTest {
         String baseUrl =
                 ConfigReader.getProperty("baseUrl");
 
-        requestSpec = new RequestSpecBuilder()
-                .setBaseUri(baseUrl)
-                .setContentType(ContentType.JSON)
-                .build();
+        String authToken =
+                ConfigReader.getProperty("authToken");
+
+        RequestSpecBuilder builder =
+                new RequestSpecBuilder()
+                        .setBaseUri(baseUrl)
+                        .setContentType(ContentType.JSON);
+
+        if (authToken != null && !authToken.isBlank()) {
+            builder.addHeader(
+                    "Authorization",
+                    "Bearer " + authToken
+            );
+        }
+
+        requestSpec = builder.build();
     }
 }
