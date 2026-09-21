@@ -45,7 +45,7 @@ public class UserService {
                 .post(UserEndpoints.USERS);
     }
 
-    public Response updateUser(int userId, UserRequest userRequest) {
+    public Response updateUser(String userId, UserRequest userRequest) {
 
         return given()
                 .spec(requestSpec)

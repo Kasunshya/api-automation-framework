@@ -26,22 +26,33 @@ public class UpdateUserTest extends BaseTest {
 
         // Send PUT request
         Response response =
-                userService.updateUser(2, userRequest);
+                userService.updateUser("2", userRequest);
 
         // Print response
         response.prettyPrint();
 
         // Validate status code
-        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(
+                response.statusCode(),
+                200
+        );
 
         // Convert JSON response to UserResponse object
         UserResponse userResponse =
                 response.as(UserResponse.class);
 
         // Print response values
-        System.out.println("User Name: " + userResponse.getName());
-        System.out.println("Job: " + userResponse.getJob());
-        System.out.println("Updated At: " + userResponse.getUpdatedAt());
+        System.out.println(
+                "User Name: " + userResponse.getName()
+        );
+
+        System.out.println(
+                "Job: " + userResponse.getJob()
+        );
+
+        System.out.println(
+                "Updated At: " + userResponse.getUpdatedAt()
+        );
 
         // Validate response values
         Assert.assertEquals(

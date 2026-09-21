@@ -1,27 +1,98 @@
 package com.qe.automation.tests;
 
 import com.qe.automation.base.BaseTest;
+import com.qe.automation.models.UserListResponse;
 import com.qe.automation.services.UserService;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.hamcrest.Matchers.*;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class FirstApiTest extends BaseTest {
 
     @Test
     public void getUsersTest() {
 
-        UserService userService = new UserService(requestSpec);
+        // Create service object
+        UserService userService =
+                new UserService(requestSpec);
 
-        Response response = userService.getUsers(2);
+        // Send GET request
+        Response response =
+                userService.getUsers(2);
 
+        // Print response
+        response.prettyPrint();
+
+        // Validate status code
+        Assert.assertEquals(
+                response.statusCode(),
+                200
+        );
+
+        // Validate response header
+        Assert.assertTrue(
+                response.getHeader("Content-Type")
+                        .contains("application/json")
+        );
+
+        // Validate JSON schema
         response.then()
-                .statusCode(200)
-                .body("page", equalTo(2))
-                .body("data.size()", greaterThan(0))
-                .body("data[0].id", equalTo(7))
-                .body("data[0].first_name", equalTo("Michael"))
-                .body("data[0].last_name", equalTo("Lawson"));
+                .assertThat()
+                .body(
+                        matchesJsonSchemaInClasspath(
+                                "schemas/users-list-schema.json"
+                        )
+                );
+
+        // Convert JSON response to Java object
+        UserListResponse userResponse =
+                response.as(UserListResponse.class);
+
+        // Print response details
+        System.out.println(
+                "Page: " + userResponse.getPage()
+        );
+
+        System.out.println(
+                "Total Users: " + userResponse.getTotal()
+        );
+
+        System.out.println(
+                "Total Pages: " + userResponse.getTotal_pages()
+        );
+
+        System.out.println(
+                "Users on Page: " +
+                userResponse.getData().size()
+        );
+
+        // Validate page information
+        Assert.assertEquals(
+                userResponse.getPage(),
+                Integer.valueOf(2)
+        );
+
+        // Validate that users exist
+        Assert.assertTrue(
+                userResponse.getData().size() > 0
+        );
+
+        // Validate first user
+        Assert.assertEquals(
+                userResponse.getData().get(0).getId(),
+                Integer.valueOf(7)
+        );
+
+        Assert.assertEquals(
+                userResponse.getData().get(0).getFirst_name(),
+                "Michael"
+        );
+
+        Assert.assertEquals(
+                userResponse.getData().get(0).getLast_name(),
+                "Lawson"
+        );
     }
 }
