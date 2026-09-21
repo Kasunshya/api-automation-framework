@@ -1,6 +1,8 @@
 package com.qe.automation.tests;
 
 import com.qe.automation.base.BaseTest;
+import com.qe.automation.models.UserRequest;
+import com.qe.automation.models.UserResponse;
 import com.qe.automation.services.UserService;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -11,33 +13,35 @@ public class CreateUserTest extends BaseTest {
     @Test
     public void createUserTest() {
 
-        String requestBody = """
-                {
-                    "name": "Kasunshya",
-                    "job": "QA Engineer"
-                }
-                """;
+        // Create request object
+        UserRequest userRequest =
+                new UserRequest("Kasunshya", "QA Engineer");
 
-        UserService userService = new UserService(requestSpec);
+        // Create service object
+        UserService userService =
+                new UserService(requestSpec);
 
-        Response response = userService.createUser(requestBody);
+        // Send POST request
+        Response response =
+                userService.createUser(userRequest);
 
+        // Print response
         response.prettyPrint();
 
         // Validate status code
         Assert.assertEquals(response.statusCode(), 201);
 
-        // Extract response values
-        String userName = response.jsonPath().getString("name");
-        String job = response.jsonPath().getString("job");
-        String userId = response.jsonPath().getString("id");
+        // Convert JSON response to UserResponse object
+        UserResponse userResponse =
+                response.as(UserResponse.class);
 
-        System.out.println("User ID: " + userId);
-        System.out.println("User Name: " + userName);
-        System.out.println("Job: " + job);
+        // Print extracted values
+        System.out.println("User ID: " + userResponse.getId());
+        System.out.println("User Name: " + userResponse.getName());
+        System.out.println("Job: " + userResponse.getJob());
 
         // Validate response values
-        Assert.assertEquals(userName, "Kasunshya");
-        Assert.assertEquals(job, "QA Engineer");
+        Assert.assertEquals(userResponse.getName(), "Kasunshya");
+        Assert.assertEquals(userResponse.getJob(), "QA Engineer");
     }
 }

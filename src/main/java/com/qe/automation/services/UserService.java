@@ -1,6 +1,7 @@
 package com.qe.automation.services;
 
 import com.qe.automation.endpoints.UserEndpoints;
+import com.qe.automation.models.UserRequest;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -34,22 +35,22 @@ public class UserService {
                 .get(UserEndpoints.USER_BY_ID);
     }
 
-    public Response createUser(String requestBody) {
+    public Response createUser(UserRequest userRequest) {
 
         return given()
                 .spec(requestSpec)
-                .body(requestBody)
+                .body(userRequest)
 
                 .when()
                 .post(UserEndpoints.USERS);
     }
 
-    public Response updateUser(int userId, String requestBody) {
+    public Response updateUser(int userId, UserRequest userRequest) {
 
         return given()
                 .spec(requestSpec)
                 .pathParam("userId", userId)
-                .body(requestBody)
+                .body(userRequest)
 
                 .when()
                 .put(UserEndpoints.USER_BY_ID);
