@@ -4,6 +4,7 @@ import com.qe.automation.base.BaseTest;
 import com.qe.automation.models.UserRequest;
 import com.qe.automation.models.UserResponse;
 import com.qe.automation.services.UserService;
+import com.qe.automation.utils.TestDataReader;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -16,14 +17,16 @@ public class UserApiChainingTest extends BaseTest {
         UserService userService =
                 new UserService(requestSpec);
 
-        // =========================
-        // STEP 1: CREATE USER
-        // =========================
+        String createName =
+                TestDataReader.getProperty("createUser.name");
+
+        String createJob =
+                TestDataReader.getProperty("createUser.job");
 
         UserRequest createRequest =
                 new UserRequest(
-                        "Kasunshya",
-                        "QA Engineer"
+                        createName,
+                        createJob
                 );
 
         Response createResponse =
@@ -31,17 +34,14 @@ public class UserApiChainingTest extends BaseTest {
 
         createResponse.prettyPrint();
 
-        // Validate create response
         Assert.assertEquals(
                 createResponse.statusCode(),
                 201
         );
 
-        // Convert response to UserResponse
         UserResponse createdUser =
                 createResponse.as(UserResponse.class);
 
-        // Extract generated user ID
         String userId =
                 createdUser.getId();
 
@@ -49,14 +49,16 @@ public class UserApiChainingTest extends BaseTest {
                 "Created User ID: " + userId
         );
 
-        // =========================
-        // STEP 2: UPDATE USER
-        // =========================
+        String updateName =
+                TestDataReader.getProperty("updateUser.name");
+
+        String updateJob =
+                TestDataReader.getProperty("updateUser.job");
 
         UserRequest updateRequest =
                 new UserRequest(
-                        "Kasunshya Updated",
-                        "Senior QA Engineer"
+                        updateName,
+                        updateJob
                 );
 
         Response updateResponse =
@@ -67,25 +69,22 @@ public class UserApiChainingTest extends BaseTest {
 
         updateResponse.prettyPrint();
 
-        // Validate update response
         Assert.assertEquals(
                 updateResponse.statusCode(),
                 200
         );
 
-        // Convert update response
         UserResponse updatedUser =
                 updateResponse.as(UserResponse.class);
 
-        // Validate updated values
         Assert.assertEquals(
                 updatedUser.getName(),
-                "Kasunshya Updated"
+                updateName
         );
 
         Assert.assertEquals(
                 updatedUser.getJob(),
-                "Senior QA Engineer"
+                updateJob
         );
 
         System.out.println(

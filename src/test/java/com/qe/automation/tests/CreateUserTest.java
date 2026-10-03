@@ -4,44 +4,81 @@ import com.qe.automation.base.BaseTest;
 import com.qe.automation.models.UserRequest;
 import com.qe.automation.models.UserResponse;
 import com.qe.automation.services.UserService;
+import com.qe.automation.utils.LoggerUtil;
+import com.qe.automation.utils.TestDataProvider;
 import io.restassured.response.Response;
+import org.slf4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CreateUserTest extends BaseTest {
 
-    @Test
-    public void createUserTest() {
+    private static final Logger logger =
+            LoggerUtil.getLogger(CreateUserTest.class);
 
-        // Create request object
+    @Test(
+            dataProvider = "userData",
+            dataProviderClass = TestDataProvider.class
+    )
+    public void createUserTest(String name, String job) {
+
+        logger.info(
+                "Starting create user test for: {} - {}",
+                name,
+                job
+        );
+
         UserRequest userRequest =
-                new UserRequest("Kasunshya", "QA Engineer");
+                new UserRequest(name, job);
 
-        // Create service object
         UserService userService =
                 new UserService(requestSpec);
 
-        // Send POST request
+        logger.info("Sending create user request");
+
         Response response =
                 userService.createUser(userRequest);
 
-        // Print response
         response.prettyPrint();
 
-        // Validate status code
-        Assert.assertEquals(response.statusCode(), 201);
+        logger.info(
+                "Create user response status: {}",
+                response.statusCode()
+        );
 
-        // Convert JSON response to UserResponse object
+        Assert.assertEquals(
+                response.statusCode(),
+                201
+        );
+
         UserResponse userResponse =
                 response.as(UserResponse.class);
 
-        // Print extracted values
-        System.out.println("User ID: " + userResponse.getId());
-        System.out.println("User Name: " + userResponse.getName());
-        System.out.println("Job: " + userResponse.getJob());
+        logger.info(
+                "Created user ID: {}",
+                userResponse.getId()
+        );
 
-        // Validate response values
-        Assert.assertEquals(userResponse.getName(), "Kasunshya");
-        Assert.assertEquals(userResponse.getJob(), "QA Engineer");
+        logger.info(
+                "Created user name: {}",
+                userResponse.getName()
+        );
+
+        logger.info(
+                "Created user job: {}",
+                userResponse.getJob()
+        );
+
+        Assert.assertEquals(
+                userResponse.getName(),
+                name
+        );
+
+        Assert.assertEquals(
+                userResponse.getJob(),
+                job
+        );
+
+        logger.info("Create user test completed successfully");
     }
 }
